@@ -2,15 +2,17 @@ import { useState } from "react";
 import Customer from "./Customer";
 
 interface Props {
-  items: {
-    customer: { accountId: number; firstName: string; lastName: string };
+  customers: {
+    accountId: number;
+    firstName: string;
+    lastName: string;
     readings: { meterReadingDateTime: string; meterReadValue: number }[];
   }[];
   heading: string;
 }
 
-function ListGroup({ items, heading }: Props) {
-  const message = items.length === 0 && <p>No items found</p>;
+function ListGroup({ customers, heading }: Props) {
+  const message = customers.length === 0 && <p>No items found</p>;
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -19,9 +21,9 @@ function ListGroup({ items, heading }: Props) {
       <h1>{heading}</h1>
       {message}
       <ul className="list-group">
-        {items.map((item, index) => (
+        {customers.map((listCustomer, index) => (
           <li
-            key={item.customer.accountId}
+            key={index}
             className={
               selectedIndex === index
                 ? "list-group-item active"
@@ -31,7 +33,7 @@ function ListGroup({ items, heading }: Props) {
               setSelectedIndex(index);
             }}
           >
-            <Customer customer={item.customer} readings={item.readings} />
+            <Customer customer={listCustomer} />
           </li>
         ))}
       </ul>

@@ -1,27 +1,31 @@
 interface Props {
-  customer: { accountId: number; firstName: string; lastName: string };
-  readings: { meterReadingDateTime: string; meterReadValue: number }[];
+  customer: {
+    accountId: number;
+    firstName: string;
+    lastName: string;
+    readings: { meterReadingDateTime: string; meterReadValue: number }[];
+  };
 }
 
-const Customer = ({ customer, readings }: Props) => {
+const Customer = ({ customer }: Props) => {
   return (
-    <div>
+    <>
       Account ID : {customer.accountId}
       <br />
       Name : {customer.firstName} {customer.lastName}
       <br />
       <br />
       Readings
-      {readings.length === 0 && <p>No readings found.</p>}
+      {customer.readings.length === 0 && <p>No readings found.</p>}
       <br />
-      {readings.map((item) => (
+      {customer.readings.map((reading) => (
         <p>
-          Date : {item.meterReadingDateTime}
+          Date : {reading.meterReadingDateTime}
           <br />
-          Reading : {String(item.meterReadValue).padStart(5, "0")}
+          Reading : {String(reading.meterReadValue).padStart(5, "0")}
         </p>
       ))}
-    </div>
+    </>
   );
 };
 

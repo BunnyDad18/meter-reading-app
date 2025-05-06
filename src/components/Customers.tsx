@@ -8,12 +8,13 @@ const Customers = () => {
   async function handleGetCustomerData() {
     try {
       await axios
-        .get("https://localhost:7260/Readings/get-customers-with-readings", {
+        .get("https://localhost:7260/Readings/get-customers", {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then(function (response) {
+          console.log(response.data);
           setCustomers(response.data);
         });
     } catch {}
@@ -34,7 +35,7 @@ const Customers = () => {
   }
 
   return (
-    <div>
+    <>
       <button
         type="button"
         className="btn btn-primary"
@@ -44,13 +45,13 @@ const Customers = () => {
       </button>
       <button
         type="button"
-        className="btn btn-danger"
+        className="btn btn-danger ms-2"
         onClick={handleDeleteReadingData}
       >
         Delete Readings Data
       </button>
-      <ListGroup heading="Customers" items={customers} />
-    </div>
+      <ListGroup heading="Customers" customers={customers} />
+    </>
   );
 };
 

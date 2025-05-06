@@ -57,7 +57,7 @@ const FileUpload = () => {
       {file && status != "uploading" && (
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary mt-2 mb-4"
           onClick={handleFileUpload}
         >
           Upload
